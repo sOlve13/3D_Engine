@@ -1,13 +1,12 @@
-# Engine.py
-
 import glfw
 from OpenGL.GL import *
 import random
 from Window import Window
 import glm
+import time
 
 class Engine:
-    def __init__(self, width, height, title, fullscreen=False):
+    def __init__(self, width, height, title, fullscreen=False, fps=60):
         self.width = width
         self.height = height
         self.title = title
@@ -18,6 +17,8 @@ class Engine:
         self.frameCount = 0
         self.previousTime = glfw.get_time()
         self.projection_matrix = glm.mat4(1.0)
+        self.fps = fps
+        self.frame_duration = 1.0 / fps
 
     def initialize(self):
         if not glfw.init():
@@ -30,6 +31,9 @@ class Engine:
         glfw.set_mouse_button_callback(self.window.getWindow(), self.mouse_button_callback)
         glfw.set_cursor_pos_callback(self.window.getWindow(), self.cursor_position_callback)
         glfw.set_char_callback(self.window.getWindow(), self.text_input_callback)
+
+        # Enable depth testing
+        glEnable(GL_DEPTH_TEST)
 
     def key_callback(self, window, key, scancode, action, mods):
         if key == glfw.KEY_SPACE and action == glfw.PRESS:
@@ -49,8 +53,11 @@ class Engine:
     def text_input_callback(self, window, character):
         self.input_text += chr(character)
 
-    def set_projection(self, fov, aspect, zNear, zFar):
-        self.projection_matrix = glm.perspective(glm.radians(fov), aspect, zNear, zFar)
+    def set_projection(self, fov, aspect, zNear, zFar, type):
+        if type == 1:
+            self.projection_matrix = glm.perspective(glm.radians(fov), aspect, zNear, zFar)
+        else:
+            self.projection_matrix = glm.ortho(-aspect, aspect, -1.0, 1.0, zNear, zFar)
 
     def main_loop(self):
         while not glfw.window_should_close(self.window.getWindow()):
@@ -65,14 +72,15 @@ class Engine:
                 self.background_color = [0, 0, 0, 1]
 
             glClearColor(*self.background_color)
-            glClear(GL_COLOR_BUFFER_BIT)
-            
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
 
             glfw.swap_buffers(self.window.getWindow())
             glfw.poll_events()
 
+            elapsed_time = glfw.get_time() - currentTime
+            if elapsed_time < self.frame_duration:
+                time.sleep(self.frame_duration - elapsed_time)
+
     def terminate(self):
         glfw.terminate()
-
- 
