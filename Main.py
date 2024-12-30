@@ -1,7 +1,6 @@
 from Engine import Engine
 from OpenGL.GL import *
-import numpy as np
-
+import glm
 
 def main():
     engine = Engine(1280, 800, "3D", False, 60)
