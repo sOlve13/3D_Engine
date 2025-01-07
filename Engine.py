@@ -5,6 +5,15 @@ from Window import Window
 import glm
 import time
 import numpy as np
+from objects.Line import *
+from objects.Triangle import *
+from objects.Pixel import *
+from objects.Line_loop import *
+from objects.Line_stripe import *
+from objects.Triangle_strip import *
+from objects.Triangle_fans import *
+from objects.Cube import *
+
 
 class Engine:
     def __init__(self, width, height, title, fullscreen=False, fps=60):
@@ -22,7 +31,7 @@ class Engine:
         self.projection_matrix = glm.mat4(1.0)
         self.fps = fps
         self.frame_duration = 1.0 / fps
-
+        self.window_should_close = False
     def initialize(self):
 
         self.window = Window(self.width, self.height, self.title, self.fullscreen, None)
@@ -41,6 +50,8 @@ class Engine:
             self.background_color = [0.2, 0.2, 0.2, 1.0]
         elif key == glfw.KEY_BACKSPACE and (action == glfw.PRESS or action == glfw.REPEAT):
             self.input_text = self.input_text[:-1]
+        elif key == glfw.KEY_1 and action == glfw.PRESS:
+            self.window_should_close = True  
 
     def mouse_button_callback(self, window, button, action, mods):
         if button == glfw.MOUSE_BUTTON_LEFT and action == glfw.PRESS:
@@ -123,7 +134,9 @@ class Engine:
         glDrawArrays(GL_TRIANGLES, 0, 3)
 
     def main_loop(self):
-        while not glfw.window_should_close(self.window.getWindow()):
+        while not glfw.window_should_close(self.window.getWindow()) and not self.window_should_close:
+            width, height = glfw.get_window_size(self.window.getWindow())
+            glViewport(0, 0, width, height)
             currentTime = glfw.get_time()
             self.frameCount += 1
             if (currentTime - self.previousTime) >= 1.0:
@@ -137,7 +150,79 @@ class Engine:
             glClearColor(*self.background_color)
             glClear(GL_COLOR_BUFFER_BIT)
 
-            self.draw()
+            vertex_shader_source = """
+            #version 330 core
+            layout (location = 0) in vec3 aPos;
+            out vec2 FragCoordinates;
+            void main()
+            {
+                gl_Position = vec4(aPos, 1.0);
+                FragCoordinates = aPos.xy;
+            }
+            """
+
+            fragment_shader_source = """
+            #version 330 core
+            in vec2 FragCoordinates;
+            out vec4 FragColor;
+            void main()
+            {
+                float gradx = (FragCoordinates.x + 1.0) / 2.0;
+                float grady = (FragCoordinates.y + 1.0) / 2.0;
+                vec3 color = vec3(gradx, grady, 1.0 - grady);
+                FragColor = vec4(color, 1.0);
+            }
+            """
+
+            triangle_vertices = np.array([
+                -0.5, -0.5, 0.0,
+                    0.5, -0.5, 0.0,
+                    0.0,  0.5, 0.0
+            ], dtype=np.float32)
+
+            triangle = Triangle(triangle_vertices, vertex_shader_source, fragment_shader_source)
+
+            line = Line([-0.5, 0.0, 0.0], [0.5, 0.0, 0.0], vertex_shader_source, fragment_shader_source)
+
+            pixel = Pixel([0.0, 0.0, 0.0], vertex_shader_source, fragment_shader_source)
+
+            line_points = [
+                [-0.5, 0.0, 0.0],
+                [-0.25, 0.5, 0.0],
+                [0.25, -0.5, 0.0],
+                [0.5, 0.0, 0.0]
+            ]
+            line_stripe = LineStripe(line_points, vertex_shader_source, fragment_shader_source)
+
+
+            line_loop_points = [
+                [-0.5, -0.5, 0.0],
+                [0.5, -0.5, 0.0],
+                [0.0,  0.5, 0.0]
+            ]
+            line_loop = LineLoop(line_loop_points, vertex_shader_source, fragment_shader_source)
+
+            triangle_strip_points = [
+                [-0.5, -0.5, 0.0],
+                [0.5, -0.5, 0.0],
+                [0.0,  0.5, 0.0],
+                [0.5,  0.5, 0.0],
+                [0.7, 0.0, 0.0],
+            ]
+            triangle_strip = TriangleStrip(triangle_strip_points, vertex_shader_source, fragment_shader_source)
+
+            triangle_fan_points = [
+                [0.0,  0.0, 0.0],
+                [-0.5, -0.5, 0.0],
+                [0.5, -0.5, 0.0],
+                [0.0,  0.5, 0.0],
+                [-0.5, 0.3, 0.0],
+            ]
+            triangle_fan = TriangleFan(triangle_fan_points, vertex_shader_source, fragment_shader_source)
+            cube = Cube(vertex_shader_source, fragment_shader_source)
+            #cube.draw()
+            #triangle_fan.draw()
+            triangle_strip.draw()
 
             glfw.swap_buffers(self.window.getWindow())
             glfw.poll_events()
