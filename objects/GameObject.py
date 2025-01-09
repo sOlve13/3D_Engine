@@ -55,8 +55,12 @@ class OpenGLObject:
 
         return program
 
-    def draw(self):
+    def draw(self, projection_matrix, view):
         glUseProgram(self.shader_program)
+        
+        MVP = projection_matrix * view
+        mvp_location = glGetUniformLocation(self.shader_program, "MVP")
+        glUniformMatrix4fv(mvp_location, 1, GL_FALSE, glm.value_ptr(MVP))
 
         glBindVertexArray(self.VAO)
         glDrawArrays(self.draw_mode, 0, len(self.vertices) // 3)

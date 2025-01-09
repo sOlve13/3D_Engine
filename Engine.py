@@ -13,6 +13,7 @@ from objects.Line_stripe import *
 from objects.Triangle_strip import *
 from objects.Triangle_fans import *
 from objects.Cube import *
+from objects.CameraObject import *
 
 
 class Engine:
@@ -32,10 +33,25 @@ class Engine:
         self.fps = fps
         self.frame_duration = 1.0 / fps
         self.window_should_close = False
+        
+        self.y = 0.0
+        self.x = 0.0
+        self.z = 0.0
+        
+        self.angle_x = 0.0
+        self.angle_y = 0.0
+        self.angle_z = 0.0
+        
+        self.scaling = 1.0
+        
+        self.camera = Camera(position=[0.0, 0.0, 3.0], target=[0.0, 0.0, 0.0], up_vector=[0.0, 1.0, 0.0])
+
     def initialize(self):
 
         self.window = Window(self.width, self.height, self.title, self.fullscreen, None)
         self.window.setup()
+        
+        glEnable(GL_DEPTH_TEST)
 
         glfw.set_key_callback(self.window.getWindow(), self.key_callback)
         glfw.set_mouse_button_callback(self.window.getWindow(), self.mouse_button_callback)
@@ -46,13 +62,53 @@ class Engine:
     def key_callback(self, window, key, scancode, action, mods):
         if key == glfw.KEY_SPACE and action == glfw.PRESS:
             self.background_color = [random.random(), random.random(), random.random(), 1.0]
-        elif key == glfw.KEY_E and action == glfw.PRESS:
+        elif key == glfw.KEY_R and action == glfw.PRESS:
             self.background_color = [0.2, 0.2, 0.2, 1.0]
         elif key == glfw.KEY_BACKSPACE and (action == glfw.PRESS or action == glfw.REPEAT):
             self.input_text = self.input_text[:-1]
         elif key == glfw.KEY_1 and action == glfw.PRESS:
             self.window_should_close = True  
-
+        elif key == glfw.KEY_UP and action == glfw.PRESS:
+            self.y += 0.1 
+        elif key == glfw.KEY_DOWN and action == glfw.PRESS:
+            self.y -= 0.1  
+        elif key == glfw.KEY_LEFT and action == glfw.PRESS:
+            self.x -= 0.1 
+        elif key == glfw.KEY_RIGHT and action == glfw.PRESS:
+            self.x += 0.1 
+        elif key == glfw.KEY_EQUAL and action == glfw.PRESS:
+            self.scaling += 0.1
+        elif key == glfw.KEY_MINUS and action == glfw.PRESS:
+            if self.scaling <= 0.11:
+                self.scaling = 0.1
+            else:
+                self.scaling -= 0.1
+        elif key == glfw.KEY_W and action == glfw.PRESS:
+            self.angle_x += 1
+        elif key == glfw.KEY_A and action == glfw.PRESS:
+            self.angle_z += 1
+        elif key == glfw.KEY_D and action == glfw.PRESS:
+            self.angle_z -= 1
+        elif key == glfw.KEY_S and action == glfw.PRESS:
+            self.angle_x -= 1
+        elif key == glfw.KEY_E and action == glfw.PRESS:
+            self.angle_y -= 1
+        elif key == glfw.KEY_Q and action == glfw.PRESS:
+            self.angle_y += 1
+            
+        elif key == glfw.KEY_J and action == glfw.PRESS:
+            self.camera.move([0.0, 0.1, 0.0])  
+        elif key == glfw.KEY_K and action == glfw.PRESS:
+            self.camera.move([0.0, -0.1, 0.0]) 
+        elif key == glfw.KEY_L and action == glfw.PRESS:
+            self.camera.move([0.1, 0.0, 0.0])
+        elif key == glfw.KEY_N and action == glfw.PRESS:
+            self.camera.move([-0.1, 0.0, 0.0]) 
+        elif key == glfw.KEY_M and action == glfw.PRESS:
+            self.camera.move([0.0, 0.0, -0.1])
+        elif key == glfw.KEY_B and action == glfw.PRESS:
+            self.camera.move([0.0, 0.0, 0.1])    
+            
     def mouse_button_callback(self, window, button, action, mods):
         if button == glfw.MOUSE_BUTTON_LEFT and action == glfw.PRESS:
             self.background_color = [random.random(), random.random(), random.random(), 1.0]
@@ -72,67 +128,6 @@ class Engine:
         else:
             self.projection_matrix = glm.ortho(-aspect, aspect, -1.0, 1.0, zNear, zFar)
 
-    def draw(self):
-        vertices = np.array([
-            -0.5, -0.5, 0,
-            0.5, -0.5, 0,
-            0.0, 0.5, 0
-        ], dtype=np.float32)
-
-        VBO = glGenBuffers(1)
-        glBindBuffer(GL_ARRAY_BUFFER, VBO)
-        glBufferData(GL_ARRAY_BUFFER, vertices.nbytes, vertices, GL_STATIC_DRAW)
-
-        VAO = glGenVertexArrays(1)
-        glBindVertexArray(VAO)
-
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * vertices.itemsize, None)
-        glEnableVertexAttribArray(0)
-
-        vertexShaderSource = """
-        #version 330 core
-        layout (location = 0) in vec3 aPos;
-        void main()
-        {
-           gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);
-        }
-        """
-
-        vertexShader = glCreateShader(GL_VERTEX_SHADER)
-        glShaderSource(vertexShader, vertexShaderSource)
-        glCompileShader(vertexShader)
-
-        if not glGetShaderiv(vertexShader, GL_COMPILE_STATUS):
-            raise Exception(glGetShaderInfoLog(vertexShader))
-
-        fragmentShaderSource = """
-        #version 330 core
-        out vec4 FragColor;
-        void main()
-        {
-            FragColor = vec4(1.0, 0.5, 0.2, 1.0);
-        }
-        """
-
-        fragmentShader = glCreateShader(GL_FRAGMENT_SHADER)
-        glShaderSource(fragmentShader, fragmentShaderSource)
-        glCompileShader(fragmentShader)
-
-        if not glGetShaderiv(fragmentShader, GL_COMPILE_STATUS):
-            raise Exception(glGetShaderInfoLog(fragmentShader))
-
-        shaderProgram = glCreateProgram()
-        glAttachShader(shaderProgram, vertexShader)
-        glAttachShader(shaderProgram, fragmentShader)
-        glLinkProgram(shaderProgram)
-
-        if not glGetProgramiv(shaderProgram, GL_LINK_STATUS):
-            raise Exception(glGetProgramInfoLog(shaderProgram))
-
-        glUseProgram(shaderProgram)
-        glBindVertexArray(VAO)
-        glDrawArrays(GL_TRIANGLES, 0, 3)
-
     def main_loop(self):
         while not glfw.window_should_close(self.window.getWindow()) and not self.window_should_close:
             width, height = glfw.get_window_size(self.window.getWindow())
@@ -146,17 +141,23 @@ class Engine:
 
             if self.input_text == "black":
                 self.background_color = [0, 0, 0, 1]
+                
+            #self.camera.set_projection(fov=45.0, aspect_ratio=width/height, near=0.1, far=100.0)
 
             glClearColor(*self.background_color)
-            glClear(GL_COLOR_BUFFER_BIT)
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+            
+            #view = glm.translate(glm.mat4(1.0), glm.vec3(0.0, 0.0, -5.0))
+            #self.set_projection(45.0, width / height, 0.1, 100.0, 1)
 
             vertex_shader_source = """
             #version 330 core
             layout (location = 0) in vec3 aPos;
+            uniform mat4 MVP;
             out vec2 FragCoordinates;
             void main()
             {
-                gl_Position = vec4(aPos, 1.0);
+                gl_Position = MVP * vec4(aPos, 1.0);
                 FragCoordinates = aPos.xy;
             }
             """
@@ -219,10 +220,23 @@ class Engine:
                 [-0.5, 0.3, 0.0],
             ]
             triangle_fan = TriangleFan(triangle_fan_points, vertex_shader_source, fragment_shader_source)
+                        
             cube = Cube(vertex_shader_source, fragment_shader_source)
-            #cube.draw()
-            #triangle_fan.draw()
-            triangle_strip.draw()
+        
+            
+            cube.translate(self.x, self.y)
+            cube.rotate(self.angle_x, self.angle_y, self.angle_z)
+            cube.scale(self.scaling)
+            
+            view = self.camera.view_matrix
+            MVP_half = self.projection_matrix * view 
+            
+            cube.draw(MVP_half)
+            
+            
+            triangle.draw(self.projection_matrix, view)
+            triangle_fan.draw(self.projection_matrix, view)
+            triangle_strip.draw(self.projection_matrix, view)
 
             glfw.swap_buffers(self.window.getWindow())
             glfw.poll_events()
