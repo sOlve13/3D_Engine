@@ -1,0 +1,1126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.5">
+<title>3D_Engine.Engine API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>3D_Engine.Engine</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="3D_Engine.Engine.Engine"><code class="flex name class">
+<span>class <span class="ident">Engine</span></span>
+<span>(</span><span>width, height, title, fullscreen=False, fps=60)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Engine:
+    &#34;&#34;&#34;
+    Main game engine class that handles window creation, rendering, and input processing.
+    
+    This class manages the game loop, shader loading, object rendering, and user input handling.
+    It serves as the central coordinator for the OpenGL-based application.
+
+    Attributes:
+        width (int): Window width in pixels
+        height (int): Window height in pixels
+        title (str): Window title
+        fullscreen (bool): Whether the window should be fullscreen
+        fps (int): Target frames per second
+        background_color (list): RGBA color values for background
+        input_text (str): Stores text input from user
+        mode (int): Current object manipulation mode (1-4)
+        light_pos (list): Position of the light source in 3D space
+        camera (Camera): Camera object for view control
+    &#34;&#34;&#34;
+
+    def __init__(self, width, height, title, fullscreen=False, fps=60):
+        &#34;&#34;&#34;
+        Initialize the Engine with window and rendering settings.
+
+        Args:
+            width (int): Window width in pixels
+            height (int): Window height in pixels
+            title (str): Window title
+            fullscreen (bool, optional): Fullscreen mode flag. Defaults to False.
+            fps (int, optional): Target frames per second. Defaults to 60.
+
+        Raises:
+            Exception: If GLFW initialization fails
+        &#34;&#34;&#34;
+        if not glfw.init():
+            raise Exception(&#34;GLFW could not be initialized!&#34;)
+        self.width = width
+        self.height = height
+        self.title = title
+        self.fullscreen = fullscreen
+        self.window = None
+        self.background_color = [0.1, 0.2, 0.3, 1.0]
+        self.input_text = &#34;&#34;
+        self.frameCount = 0
+        self.previousTime = glfw.get_time()
+        self.projection_matrix = glm.mat4(1.0)
+        self.fps = fps
+        self.frame_duration = 1.0 / fps
+        self.window_should_close = False
+        self.mode = 0
+
+        self.light_pos = [2.0, 2.0, 2.0]
+        self.angle_x_1 = 0.0
+        self.angle_x_2 = 0.0
+        self.angle_x_3 = 0.0
+
+        self.angle_y_1 = 0.0
+        self.angle_y_2 = 0.0
+        self.angle_y_3 = 0.0
+
+        self.angle_z_1 = 0.0
+        self.angle_z_2 = 0.0
+        self.angle_z_3 = 0.0
+
+        self.y_1 = 0.0
+        self.y_2 = 0.0
+        self.y_3 = 0.0
+        self.x_1 = 0.0
+        self.x_2 = 0.0
+        self.x_3 = 0.0
+        self.z_1 = 0.0
+        self.z_2 = 0.0
+        self.z_3 = 0.0
+        self.scaling_1 = 1.0
+        self.scaling_2 = 1.0
+        self.scaling_3 = 1.0
+
+        self.camera = Camera(
+            position=[0.0, 0.0, 3.0], target=[0.0, 0.0, 0.0], up_vector=[0.0, 1.0, 0.0]
+        )
+
+    def initialize(self):
+        &#34;&#34;&#34;
+        Initialize the window and OpenGL context.
+        
+        Sets up the window, enables depth testing, and registers all input callbacks.
+        Must be called before starting the main loop.
+        &#34;&#34;&#34;
+        self.window = Window(self.width, self.height, self.title, self.fullscreen, None)
+        self.window.setup()
+
+        glEnable(GL_DEPTH_TEST)
+
+        glfw.set_key_callback(self.window.getWindow(), self.key_callback)
+        glfw.set_mouse_button_callback(
+            self.window.getWindow(), self.mouse_button_callback
+        )
+        glfw.set_cursor_pos_callback(
+            self.window.getWindow(), self.cursor_position_callback
+        )
+        glfw.set_char_callback(self.window.getWindow(), self.text_input_callback)
+        glfw.set_scroll_callback(self.window.getWindow(), self.scroll_callback)
+
+    def key_callback(self, window, key, scancode, action, mods):
+        &#34;&#34;&#34;
+        Handle keyboard input events.
+
+        Args:
+            window: GLFW window instance
+            key (int): The keyboard key that was pressed or released
+            scancode (int): The system-specific scancode of the key
+            action (int): GLFW_PRESS, GLFW_RELEASE or GLFW_REPEAT
+            mods (int): Bit field describing which modifier keys were held down
+        &#34;&#34;&#34;
+        if key == glfw.KEY_SPACE and action == glfw.PRESS:
+            self.background_color = [
+                random.random(),
+                random.random(),
+                random.random(),
+                1.0,
+            ]
+        elif key == glfw.KEY_R and action == glfw.PRESS:
+            self.background_color = [0.2, 0.2, 0.2, 1.0]
+        elif key == glfw.KEY_BACKSPACE and (
+            action == glfw.PRESS or action == glfw.REPEAT
+        ):
+            self.input_text = self.input_text[:-1]
+
+        elif key == glfw.KEY_UP and action == glfw.PRESS:
+            if self.mode == 1:
+                self.y_1 += 0.1
+            elif self.mode == 2:
+                self.y_2 += 0.1
+            elif self.mode == 3:
+                self.y_3 += 0.1
+            elif self.mode == 4:
+                self.y_4 += 0.1
+        elif key == glfw.KEY_DOWN and action == glfw.PRESS:
+            if self.mode == 1:
+                self.y_1 -= 0.1
+            elif self.mode == 2:
+                self.y_2 -= 0.1
+            elif self.mode == 3:
+                self.y_3 -= 0.1
+            elif self.mode == 4:
+                self.y_4 -= 0.1
+        elif key == glfw.KEY_LEFT and action == glfw.PRESS:
+            if self.mode == 1:
+                self.x_1 -= 0.1
+            elif self.mode == 2:
+                self.x_2 -= 0.1
+            elif self.mode == 3:
+                self.x_3 -= 0.1
+            elif self.mode == 4:
+                self.x_4 -= 0.1
+        elif key == glfw.KEY_RIGHT and action == glfw.PRESS:
+            if self.mode == 1:
+                self.x_1 += 0.1
+            elif self.mode == 2:
+                self.x_2 += 0.1
+            elif self.mode == 3:
+                self.x_3 += 0.1
+            elif self.mode == 4:
+                self.x_4 += 0.1
+        elif key == glfw.KEY_EQUAL and action == glfw.PRESS:
+            if self.mode == 1:
+                self.scaling_1 += 0.1
+            elif self.mode == 2:
+                self.scaling_2 += 0.1
+            elif self.mode == 3:
+                self.scaling_3 += 0.1
+
+        elif key == glfw.KEY_MINUS and action == glfw.PRESS:
+            if self.mode == 1:
+                if self.scaling_1 &lt;= 0.11:
+                    self.scaling_1 = 0.1
+                else:
+                    self.scaling_1 -= 0.1
+            elif self.mode == 2:
+                if self.scaling_2 &lt;= 0.11:
+                    self.scaling_2 = 0.1
+                else:
+                    self.scaling_2 -= 0.1
+            elif self.mode == 3:
+                if self.scaling_3 &lt;= 0.11:
+                    self.scaling_3 = 0.1
+                else:
+                    self.scaling_3 -= 0.1
+        elif key == glfw.KEY_W and action == glfw.PRESS:
+            if self.mode == 1:
+                self.angle_x_1 += 1
+            elif self.mode == 2:
+                self.angle_x_2 += 1
+            elif self.mode == 3:
+                self.angle_x_3 += 1
+        elif key == glfw.KEY_A and action == glfw.PRESS:
+            if self.mode == 1:
+                self.angle_z_1 += 1
+            elif self.mode == 2:
+                self.angle_z_2 += 1
+            elif self.mode == 3:
+                self.angle_z_3 += 1
+        elif key == glfw.KEY_D and action == glfw.PRESS:
+            if self.mode == 1:
+                self.angle_z_1 -= 1
+            elif self.mode == 2:
+                self.angle_z_2 -= 1
+            elif self.mode == 3:
+                self.angle_z_3 -= 1
+        elif key == glfw.KEY_S and action == glfw.PRESS:
+            if self.mode == 1:
+                self.angle_x_1 -= 1
+            elif self.mode == 2:
+                self.angle_x_2 -= 1
+            elif self.mode == 3:
+                self.angle_x_3 -= 1
+        elif key == glfw.KEY_E and action == glfw.PRESS:
+            if self.mode == 1:
+                self.angle_y_1 -= 1
+            elif self.mode == 2:
+                self.angle_y_2 -= 1
+            elif self.mode == 3:
+                self.angle_y_3 -= 1
+        elif key == glfw.KEY_Q and action == glfw.PRESS:
+            if self.mode == 1:
+                self.angle_y_1 += 1
+            elif self.mode == 2:
+                self.angle_y_2 += 1
+            elif self.mode == 3:
+                self.angle_y_3 += 1
+
+        elif key == glfw.KEY_J and action == glfw.PRESS:
+            self.camera.move([0.0, 0.1, 0.0])
+        elif key == glfw.KEY_K and action == glfw.PRESS:
+            self.camera.move([0.0, -0.1, 0.0])
+        elif key == glfw.KEY_L and action == glfw.PRESS:
+            self.camera.move([0.1, 0.0, 0.0])
+        elif key == glfw.KEY_N and action == glfw.PRESS:
+            self.camera.move([-0.1, 0.0, 0.0])
+        elif key == glfw.KEY_M and action == glfw.PRESS:
+            self.camera.move([0.0, 0.0, -0.1])
+        elif key == glfw.KEY_B and action == glfw.PRESS:
+            self.camera.move([0.0, 0.0, 0.1])
+        elif key == glfw.KEY_1 and action == glfw.PRESS:
+            self.mode = 1
+        elif key == glfw.KEY_2 and action == glfw.PRESS:
+            self.mode = 2
+        elif key == glfw.KEY_3 and action == glfw.PRESS:
+            self.mode = 3
+        elif key == glfw.KEY_4 and action == glfw.PRESS:
+            self.mode = 4
+
+    def mouse_button_callback(self, window, button, action, mods):
+        &#34;&#34;&#34;
+        Handle mouse button events.
+
+        Args:
+            window: GLFW window instance
+            button (int): The mouse button that was pressed or released
+            action (int): GLFW_PRESS or GLFW_RELEASE
+            mods (int): Bit field describing which modifier keys were held down
+        &#34;&#34;&#34;
+        if button == glfw.MOUSE_BUTTON_LEFT and action == glfw.PRESS:
+            self.background_color = [
+                random.random(),
+                random.random(),
+                random.random(),
+                1.0,
+            ]
+
+    def cursor_position_callback(self, window, xpos, ypos):
+        &#34;&#34;&#34;
+        Handle mouse cursor movement.
+
+        Args:
+            window: GLFW window instance
+            xpos (float): New cursor x-coordinate
+            ypos (float): New cursor y-coordinate
+        &#34;&#34;&#34;
+        self.background_color = [xpos / self.width, ypos / self.height, 0.5, 1.0]
+
+    def scroll_callback(self, window, xoffset, yoffset):
+        &#34;&#34;&#34;
+        Handle mouse scroll wheel events.
+
+        Args:
+            window: GLFW window instance
+            xoffset (float): Scroll offset along the x-axis
+            yoffset (float): Scroll offset along the y-axis
+        &#34;&#34;&#34;
+        self.background_color = [yoffset / 0.5, yoffset / 1.0, 1, 1.0]
+
+    def text_input_callback(self, window, character):
+        &#34;&#34;&#34;
+        Handle text input events.
+
+        Args:
+            window: GLFW window instance
+            character (int): Unicode codepoint of the character
+        &#34;&#34;&#34;
+        self.input_text += chr(character)
+
+    def set_projection(self, fov, aspect, zNear, zFar, type):
+        &#34;&#34;&#34;
+        Set the projection matrix for rendering.
+
+        Args:
+            fov (float): Field of view in degrees
+            aspect (float): Aspect ratio (width/height)
+            zNear (float): Near clipping plane distance
+            zFar (float): Far clipping plane distance
+            type (int): Projection type (1 for perspective, other for orthographic)
+        &#34;&#34;&#34;
+        if type == 1:
+            self.projection_matrix = glm.perspective(
+                glm.radians(fov), aspect, zNear, zFar
+            )
+        else:
+            self.projection_matrix = glm.ortho(-aspect, aspect, -1.0, 1.0, zNear, zFar)
+
+    def main_loop(self):
+        &#34;&#34;&#34;
+        Main game loop that handles rendering and updates.
+        
+        This method:
+        - Maintains the target frame rate
+        - Updates window title with FPS
+        - Handles input processing
+        - Creates and renders scene objects
+        - Manages window buffer swapping
+        - Controls frame timing
+        &#34;&#34;&#34;
+        while (
+            not glfw.window_should_close(self.window.getWindow())
+            and not self.window_should_close
+        ):
+            width, height = glfw.get_window_size(self.window.getWindow())
+            glViewport(0, 0, width, height)
+            currentTime = glfw.get_time()
+            self.frameCount += 1
+            if (currentTime - self.previousTime) &gt;= 1.0:
+                glfw.set_window_title(
+                    self.window.getWindow(), f&#34;FPS: {self.frameCount}&#34;
+                )
+                self.frameCount = 0
+                self.previousTime = currentTime
+
+            if self.input_text == &#34;;;;;;&#34;:
+                self.background_color = [0, 0, 0, 1]
+
+            # self.camera.set_projection(fov=45.0, aspect_ratio=width/height, near=0.1, far=100.0)
+
+            glClearColor(*self.background_color)
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+            # view = glm.translate(glm.mat4(1.0), glm.vec3(0.0, 0.0, -5.0))
+            # self.set_projection(45.0, width / height, 0.1, 100.0, 1)
+
+            
+
+        
+            
+
+            view = self.camera.view_matrix
+            MVP_half = self.projection_matrix * view
+
+            cube = Cube(vertex_shader_source, fragment_shader_source)
+            cube_lamp = LightCube(lamp_vertex_shader, lamp_fragment_shader)
+            textured_cube = TexturedCube(
+                texture_vertex_shader,
+                texture_fragment_shader,
+                &#34;textures/wood.png&#34;
+            )
+            textured_sphere = TexturedSphere(
+                texture_vertex_shader,
+                texture_fragment_shader,
+                &#34;textures/earth.jpg&#34;,  
+                radius=1.0,
+                sectors=32, 
+                stacks=16,
+            )
+
+            points_fan = [
+                0.0, 0.0, 0.0,
+                0.5, 0.0, 0.0,
+                0.35, 0.35, 0.0,
+                0.0, 0.5, 0.0,
+                -0.35, 0.35, 0.0,
+                -0.5, 0.0, 0.0,
+                -0.35, -0.35, 0.0,
+                0.0, -0.5, 0.0,
+                0.35, -0.35, 0.0,
+                0.5, 0.0, 0.0  
+            ]
+
+            points_strip = [
+                -0.5, -0.5, 0.0,
+                -0.5, 0.5, 0.0,
+                0.0, -0.5, 0.0,
+                0.0, 0.5, 0.0,
+                0.5, -0.5, 0.0,
+                0.5, 0.5, 0.0
+            ]
+
+            triangle_fan = Triangle_fans(points_fan, vertex_shader_source, fragment_shader_source)
+            triangle_strip = Triangle_strip(points_strip, vertex_shader_source, fragment_shader_source)
+
+            triangle_fan.translate(-2.0, -2.0)  
+            triangle_strip.translate(2.0, -2.0) 
+
+      
+            cube.translate(self.x_1, self.y_1)
+            cube.rotate(self.angle_x_1, self.angle_y_1, self.angle_z_1)
+            cube.scale(self.scaling_1)
+            
+            textured_cube.translate(self.x_2, self.y_2)
+            textured_cube.rotate(self.angle_x_2, self.angle_y_2, self.angle_z_2)
+            textured_cube.scale(self.scaling_2)
+            
+            textured_sphere.translate(self.x_3, self.y_3)
+            textured_sphere.rotate(self.angle_x_3, self.angle_y_3, self.angle_z_3)
+            textured_sphere.scale(self.scaling_3)
+
+            textured_cube.draw(self.projection_matrix, view, self.camera.get_position(), self.light_pos)
+            textured_sphere.draw(self.projection_matrix, view, self.camera.get_position(), self.light_pos)
+            cube.draw(self.projection_matrix, view, self.camera.get_position(), self.light_pos)
+            cube_lamp.draw(self.projection_matrix, view, self.light_pos)
+
+            triangle_fan.draw(self.projection_matrix, view)
+            triangle_strip.draw(self.projection_matrix, view)
+
+            print(self.mode)
+            #triangle.draw(self.projection_matrix, view)
+            #triangle_fan.draw(self.projection_matrix, view)
+            #triangle_strip.draw(self.projection_matrix, view)
+
+            glfw.swap_buffers(self.window.getWindow())
+            glfw.poll_events()
+
+            elapsed_time = glfw.get_time() - currentTime
+            if elapsed_time &lt; self.frame_duration:
+                time.sleep(self.frame_duration - elapsed_time)
+
+    def terminate(self):
+        &#34;&#34;&#34;
+        Clean up resources and terminate GLFW.
+        Should be called when the application exits.
+        &#34;&#34;&#34;
+        glfw.terminate()</code></pre>
+</details>
+<div class="desc"><p>Main game engine class that handles window creation, rendering, and input processing.</p>
+<p>This class manages the game loop, shader loading, object rendering, and user input handling.
+It serves as the central coordinator for the OpenGL-based application.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>width</code></strong> :&ensp;<code>int</code></dt>
+<dd>Window width in pixels</dd>
+<dt><strong><code>height</code></strong> :&ensp;<code>int</code></dt>
+<dd>Window height in pixels</dd>
+<dt><strong><code>title</code></strong> :&ensp;<code>str</code></dt>
+<dd>Window title</dd>
+<dt><strong><code>fullscreen</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Whether the window should be fullscreen</dd>
+<dt><strong><code>fps</code></strong> :&ensp;<code>int</code></dt>
+<dd>Target frames per second</dd>
+<dt><strong><code>background_color</code></strong> :&ensp;<code>list</code></dt>
+<dd>RGBA color values for background</dd>
+<dt><strong><code>input_text</code></strong> :&ensp;<code>str</code></dt>
+<dd>Stores text input from user</dd>
+<dt><strong><code>mode</code></strong> :&ensp;<code>int</code></dt>
+<dd>Current object manipulation mode (1-4)</dd>
+<dt><strong><code>light_pos</code></strong> :&ensp;<code>list</code></dt>
+<dd>Position of the light source in 3D space</dd>
+<dt><strong><code>camera</code></strong> :&ensp;<code>Camera</code></dt>
+<dd>Camera object for view control</dd>
+</dl>
+<p>Initialize the Engine with window and rendering settings.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>width</code></strong> :&ensp;<code>int</code></dt>
+<dd>Window width in pixels</dd>
+<dt><strong><code>height</code></strong> :&ensp;<code>int</code></dt>
+<dd>Window height in pixels</dd>
+<dt><strong><code>title</code></strong> :&ensp;<code>str</code></dt>
+<dd>Window title</dd>
+<dt><strong><code>fullscreen</code></strong> :&ensp;<code>bool</code>, optional</dt>
+<dd>Fullscreen mode flag. Defaults to False.</dd>
+<dt><strong><code>fps</code></strong> :&ensp;<code>int</code>, optional</dt>
+<dd>Target frames per second. Defaults to 60.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>Exception</code></dt>
+<dd>If GLFW initialization fails</dd>
+</dl></div>
+<h3>Methods</h3>
+<dl>
+<dt id="3D_Engine.Engine.Engine.cursor_position_callback"><code class="name flex">
+<span>def <span class="ident">cursor_position_callback</span></span>(<span>self, window, xpos, ypos)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cursor_position_callback(self, window, xpos, ypos):
+    &#34;&#34;&#34;
+    Handle mouse cursor movement.
+
+    Args:
+        window: GLFW window instance
+        xpos (float): New cursor x-coordinate
+        ypos (float): New cursor y-coordinate
+    &#34;&#34;&#34;
+    self.background_color = [xpos / self.width, ypos / self.height, 0.5, 1.0]</code></pre>
+</details>
+<div class="desc"><p>Handle mouse cursor movement.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>window</code></strong></dt>
+<dd>GLFW window instance</dd>
+<dt><strong><code>xpos</code></strong> :&ensp;<code>float</code></dt>
+<dd>New cursor x-coordinate</dd>
+<dt><strong><code>ypos</code></strong> :&ensp;<code>float</code></dt>
+<dd>New cursor y-coordinate</dd>
+</dl></div>
+</dd>
+<dt id="3D_Engine.Engine.Engine.initialize"><code class="name flex">
+<span>def <span class="ident">initialize</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def initialize(self):
+    &#34;&#34;&#34;
+    Initialize the window and OpenGL context.
+    
+    Sets up the window, enables depth testing, and registers all input callbacks.
+    Must be called before starting the main loop.
+    &#34;&#34;&#34;
+    self.window = Window(self.width, self.height, self.title, self.fullscreen, None)
+    self.window.setup()
+
+    glEnable(GL_DEPTH_TEST)
+
+    glfw.set_key_callback(self.window.getWindow(), self.key_callback)
+    glfw.set_mouse_button_callback(
+        self.window.getWindow(), self.mouse_button_callback
+    )
+    glfw.set_cursor_pos_callback(
+        self.window.getWindow(), self.cursor_position_callback
+    )
+    glfw.set_char_callback(self.window.getWindow(), self.text_input_callback)
+    glfw.set_scroll_callback(self.window.getWindow(), self.scroll_callback)</code></pre>
+</details>
+<div class="desc"><p>Initialize the window and OpenGL context.</p>
+<p>Sets up the window, enables depth testing, and registers all input callbacks.
+Must be called before starting the main loop.</p></div>
+</dd>
+<dt id="3D_Engine.Engine.Engine.key_callback"><code class="name flex">
+<span>def <span class="ident">key_callback</span></span>(<span>self, window, key, scancode, action, mods)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def key_callback(self, window, key, scancode, action, mods):
+    &#34;&#34;&#34;
+    Handle keyboard input events.
+
+    Args:
+        window: GLFW window instance
+        key (int): The keyboard key that was pressed or released
+        scancode (int): The system-specific scancode of the key
+        action (int): GLFW_PRESS, GLFW_RELEASE or GLFW_REPEAT
+        mods (int): Bit field describing which modifier keys were held down
+    &#34;&#34;&#34;
+    if key == glfw.KEY_SPACE and action == glfw.PRESS:
+        self.background_color = [
+            random.random(),
+            random.random(),
+            random.random(),
+            1.0,
+        ]
+    elif key == glfw.KEY_R and action == glfw.PRESS:
+        self.background_color = [0.2, 0.2, 0.2, 1.0]
+    elif key == glfw.KEY_BACKSPACE and (
+        action == glfw.PRESS or action == glfw.REPEAT
+    ):
+        self.input_text = self.input_text[:-1]
+
+    elif key == glfw.KEY_UP and action == glfw.PRESS:
+        if self.mode == 1:
+            self.y_1 += 0.1
+        elif self.mode == 2:
+            self.y_2 += 0.1
+        elif self.mode == 3:
+            self.y_3 += 0.1
+        elif self.mode == 4:
+            self.y_4 += 0.1
+    elif key == glfw.KEY_DOWN and action == glfw.PRESS:
+        if self.mode == 1:
+            self.y_1 -= 0.1
+        elif self.mode == 2:
+            self.y_2 -= 0.1
+        elif self.mode == 3:
+            self.y_3 -= 0.1
+        elif self.mode == 4:
+            self.y_4 -= 0.1
+    elif key == glfw.KEY_LEFT and action == glfw.PRESS:
+        if self.mode == 1:
+            self.x_1 -= 0.1
+        elif self.mode == 2:
+            self.x_2 -= 0.1
+        elif self.mode == 3:
+            self.x_3 -= 0.1
+        elif self.mode == 4:
+            self.x_4 -= 0.1
+    elif key == glfw.KEY_RIGHT and action == glfw.PRESS:
+        if self.mode == 1:
+            self.x_1 += 0.1
+        elif self.mode == 2:
+            self.x_2 += 0.1
+        elif self.mode == 3:
+            self.x_3 += 0.1
+        elif self.mode == 4:
+            self.x_4 += 0.1
+    elif key == glfw.KEY_EQUAL and action == glfw.PRESS:
+        if self.mode == 1:
+            self.scaling_1 += 0.1
+        elif self.mode == 2:
+            self.scaling_2 += 0.1
+        elif self.mode == 3:
+            self.scaling_3 += 0.1
+
+    elif key == glfw.KEY_MINUS and action == glfw.PRESS:
+        if self.mode == 1:
+            if self.scaling_1 &lt;= 0.11:
+                self.scaling_1 = 0.1
+            else:
+                self.scaling_1 -= 0.1
+        elif self.mode == 2:
+            if self.scaling_2 &lt;= 0.11:
+                self.scaling_2 = 0.1
+            else:
+                self.scaling_2 -= 0.1
+        elif self.mode == 3:
+            if self.scaling_3 &lt;= 0.11:
+                self.scaling_3 = 0.1
+            else:
+                self.scaling_3 -= 0.1
+    elif key == glfw.KEY_W and action == glfw.PRESS:
+        if self.mode == 1:
+            self.angle_x_1 += 1
+        elif self.mode == 2:
+            self.angle_x_2 += 1
+        elif self.mode == 3:
+            self.angle_x_3 += 1
+    elif key == glfw.KEY_A and action == glfw.PRESS:
+        if self.mode == 1:
+            self.angle_z_1 += 1
+        elif self.mode == 2:
+            self.angle_z_2 += 1
+        elif self.mode == 3:
+            self.angle_z_3 += 1
+    elif key == glfw.KEY_D and action == glfw.PRESS:
+        if self.mode == 1:
+            self.angle_z_1 -= 1
+        elif self.mode == 2:
+            self.angle_z_2 -= 1
+        elif self.mode == 3:
+            self.angle_z_3 -= 1
+    elif key == glfw.KEY_S and action == glfw.PRESS:
+        if self.mode == 1:
+            self.angle_x_1 -= 1
+        elif self.mode == 2:
+            self.angle_x_2 -= 1
+        elif self.mode == 3:
+            self.angle_x_3 -= 1
+    elif key == glfw.KEY_E and action == glfw.PRESS:
+        if self.mode == 1:
+            self.angle_y_1 -= 1
+        elif self.mode == 2:
+            self.angle_y_2 -= 1
+        elif self.mode == 3:
+            self.angle_y_3 -= 1
+    elif key == glfw.KEY_Q and action == glfw.PRESS:
+        if self.mode == 1:
+            self.angle_y_1 += 1
+        elif self.mode == 2:
+            self.angle_y_2 += 1
+        elif self.mode == 3:
+            self.angle_y_3 += 1
+
+    elif key == glfw.KEY_J and action == glfw.PRESS:
+        self.camera.move([0.0, 0.1, 0.0])
+    elif key == glfw.KEY_K and action == glfw.PRESS:
+        self.camera.move([0.0, -0.1, 0.0])
+    elif key == glfw.KEY_L and action == glfw.PRESS:
+        self.camera.move([0.1, 0.0, 0.0])
+    elif key == glfw.KEY_N and action == glfw.PRESS:
+        self.camera.move([-0.1, 0.0, 0.0])
+    elif key == glfw.KEY_M and action == glfw.PRESS:
+        self.camera.move([0.0, 0.0, -0.1])
+    elif key == glfw.KEY_B and action == glfw.PRESS:
+        self.camera.move([0.0, 0.0, 0.1])
+    elif key == glfw.KEY_1 and action == glfw.PRESS:
+        self.mode = 1
+    elif key == glfw.KEY_2 and action == glfw.PRESS:
+        self.mode = 2
+    elif key == glfw.KEY_3 and action == glfw.PRESS:
+        self.mode = 3
+    elif key == glfw.KEY_4 and action == glfw.PRESS:
+        self.mode = 4</code></pre>
+</details>
+<div class="desc"><p>Handle keyboard input events.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>window</code></strong></dt>
+<dd>GLFW window instance</dd>
+<dt><strong><code>key</code></strong> :&ensp;<code>int</code></dt>
+<dd>The keyboard key that was pressed or released</dd>
+<dt><strong><code>scancode</code></strong> :&ensp;<code>int</code></dt>
+<dd>The system-specific scancode of the key</dd>
+<dt><strong><code>action</code></strong> :&ensp;<code>int</code></dt>
+<dd>GLFW_PRESS, GLFW_RELEASE or GLFW_REPEAT</dd>
+<dt><strong><code>mods</code></strong> :&ensp;<code>int</code></dt>
+<dd>Bit field describing which modifier keys were held down</dd>
+</dl></div>
+</dd>
+<dt id="3D_Engine.Engine.Engine.main_loop"><code class="name flex">
+<span>def <span class="ident">main_loop</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def main_loop(self):
+    &#34;&#34;&#34;
+    Main game loop that handles rendering and updates.
+    
+    This method:
+    - Maintains the target frame rate
+    - Updates window title with FPS
+    - Handles input processing
+    - Creates and renders scene objects
+    - Manages window buffer swapping
+    - Controls frame timing
+    &#34;&#34;&#34;
+    while (
+        not glfw.window_should_close(self.window.getWindow())
+        and not self.window_should_close
+    ):
+        width, height = glfw.get_window_size(self.window.getWindow())
+        glViewport(0, 0, width, height)
+        currentTime = glfw.get_time()
+        self.frameCount += 1
+        if (currentTime - self.previousTime) &gt;= 1.0:
+            glfw.set_window_title(
+                self.window.getWindow(), f&#34;FPS: {self.frameCount}&#34;
+            )
+            self.frameCount = 0
+            self.previousTime = currentTime
+
+        if self.input_text == &#34;;;;;;&#34;:
+            self.background_color = [0, 0, 0, 1]
+
+        # self.camera.set_projection(fov=45.0, aspect_ratio=width/height, near=0.1, far=100.0)
+
+        glClearColor(*self.background_color)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+        # view = glm.translate(glm.mat4(1.0), glm.vec3(0.0, 0.0, -5.0))
+        # self.set_projection(45.0, width / height, 0.1, 100.0, 1)
+
+        
+
+    
+        
+
+        view = self.camera.view_matrix
+        MVP_half = self.projection_matrix * view
+
+        cube = Cube(vertex_shader_source, fragment_shader_source)
+        cube_lamp = LightCube(lamp_vertex_shader, lamp_fragment_shader)
+        textured_cube = TexturedCube(
+            texture_vertex_shader,
+            texture_fragment_shader,
+            &#34;textures/wood.png&#34;
+        )
+        textured_sphere = TexturedSphere(
+            texture_vertex_shader,
+            texture_fragment_shader,
+            &#34;textures/earth.jpg&#34;,  
+            radius=1.0,
+            sectors=32, 
+            stacks=16,
+        )
+
+        points_fan = [
+            0.0, 0.0, 0.0,
+            0.5, 0.0, 0.0,
+            0.35, 0.35, 0.0,
+            0.0, 0.5, 0.0,
+            -0.35, 0.35, 0.0,
+            -0.5, 0.0, 0.0,
+            -0.35, -0.35, 0.0,
+            0.0, -0.5, 0.0,
+            0.35, -0.35, 0.0,
+            0.5, 0.0, 0.0  
+        ]
+
+        points_strip = [
+            -0.5, -0.5, 0.0,
+            -0.5, 0.5, 0.0,
+            0.0, -0.5, 0.0,
+            0.0, 0.5, 0.0,
+            0.5, -0.5, 0.0,
+            0.5, 0.5, 0.0
+        ]
+
+        triangle_fan = Triangle_fans(points_fan, vertex_shader_source, fragment_shader_source)
+        triangle_strip = Triangle_strip(points_strip, vertex_shader_source, fragment_shader_source)
+
+        triangle_fan.translate(-2.0, -2.0)  
+        triangle_strip.translate(2.0, -2.0) 
+
+  
+        cube.translate(self.x_1, self.y_1)
+        cube.rotate(self.angle_x_1, self.angle_y_1, self.angle_z_1)
+        cube.scale(self.scaling_1)
+        
+        textured_cube.translate(self.x_2, self.y_2)
+        textured_cube.rotate(self.angle_x_2, self.angle_y_2, self.angle_z_2)
+        textured_cube.scale(self.scaling_2)
+        
+        textured_sphere.translate(self.x_3, self.y_3)
+        textured_sphere.rotate(self.angle_x_3, self.angle_y_3, self.angle_z_3)
+        textured_sphere.scale(self.scaling_3)
+
+        textured_cube.draw(self.projection_matrix, view, self.camera.get_position(), self.light_pos)
+        textured_sphere.draw(self.projection_matrix, view, self.camera.get_position(), self.light_pos)
+        cube.draw(self.projection_matrix, view, self.camera.get_position(), self.light_pos)
+        cube_lamp.draw(self.projection_matrix, view, self.light_pos)
+
+        triangle_fan.draw(self.projection_matrix, view)
+        triangle_strip.draw(self.projection_matrix, view)
+
+        print(self.mode)
+        #triangle.draw(self.projection_matrix, view)
+        #triangle_fan.draw(self.projection_matrix, view)
+        #triangle_strip.draw(self.projection_matrix, view)
+
+        glfw.swap_buffers(self.window.getWindow())
+        glfw.poll_events()
+
+        elapsed_time = glfw.get_time() - currentTime
+        if elapsed_time &lt; self.frame_duration:
+            time.sleep(self.frame_duration - elapsed_time)</code></pre>
+</details>
+<div class="desc"><p>Main game loop that handles rendering and updates.</p>
+<p>This method:
+- Maintains the target frame rate
+- Updates window title with FPS
+- Handles input processing
+- Creates and renders scene objects
+- Manages window buffer swapping
+- Controls frame timing</p></div>
+</dd>
+<dt id="3D_Engine.Engine.Engine.mouse_button_callback"><code class="name flex">
+<span>def <span class="ident">mouse_button_callback</span></span>(<span>self, window, button, action, mods)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mouse_button_callback(self, window, button, action, mods):
+    &#34;&#34;&#34;
+    Handle mouse button events.
+
+    Args:
+        window: GLFW window instance
+        button (int): The mouse button that was pressed or released
+        action (int): GLFW_PRESS or GLFW_RELEASE
+        mods (int): Bit field describing which modifier keys were held down
+    &#34;&#34;&#34;
+    if button == glfw.MOUSE_BUTTON_LEFT and action == glfw.PRESS:
+        self.background_color = [
+            random.random(),
+            random.random(),
+            random.random(),
+            1.0,
+        ]</code></pre>
+</details>
+<div class="desc"><p>Handle mouse button events.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>window</code></strong></dt>
+<dd>GLFW window instance</dd>
+<dt><strong><code>button</code></strong> :&ensp;<code>int</code></dt>
+<dd>The mouse button that was pressed or released</dd>
+<dt><strong><code>action</code></strong> :&ensp;<code>int</code></dt>
+<dd>GLFW_PRESS or GLFW_RELEASE</dd>
+<dt><strong><code>mods</code></strong> :&ensp;<code>int</code></dt>
+<dd>Bit field describing which modifier keys were held down</dd>
+</dl></div>
+</dd>
+<dt id="3D_Engine.Engine.Engine.scroll_callback"><code class="name flex">
+<span>def <span class="ident">scroll_callback</span></span>(<span>self, window, xoffset, yoffset)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def scroll_callback(self, window, xoffset, yoffset):
+    &#34;&#34;&#34;
+    Handle mouse scroll wheel events.
+
+    Args:
+        window: GLFW window instance
+        xoffset (float): Scroll offset along the x-axis
+        yoffset (float): Scroll offset along the y-axis
+    &#34;&#34;&#34;
+    self.background_color = [yoffset / 0.5, yoffset / 1.0, 1, 1.0]</code></pre>
+</details>
+<div class="desc"><p>Handle mouse scroll wheel events.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>window</code></strong></dt>
+<dd>GLFW window instance</dd>
+<dt><strong><code>xoffset</code></strong> :&ensp;<code>float</code></dt>
+<dd>Scroll offset along the x-axis</dd>
+<dt><strong><code>yoffset</code></strong> :&ensp;<code>float</code></dt>
+<dd>Scroll offset along the y-axis</dd>
+</dl></div>
+</dd>
+<dt id="3D_Engine.Engine.Engine.set_projection"><code class="name flex">
+<span>def <span class="ident">set_projection</span></span>(<span>self, fov, aspect, zNear, zFar, type)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_projection(self, fov, aspect, zNear, zFar, type):
+    &#34;&#34;&#34;
+    Set the projection matrix for rendering.
+
+    Args:
+        fov (float): Field of view in degrees
+        aspect (float): Aspect ratio (width/height)
+        zNear (float): Near clipping plane distance
+        zFar (float): Far clipping plane distance
+        type (int): Projection type (1 for perspective, other for orthographic)
+    &#34;&#34;&#34;
+    if type == 1:
+        self.projection_matrix = glm.perspective(
+            glm.radians(fov), aspect, zNear, zFar
+        )
+    else:
+        self.projection_matrix = glm.ortho(-aspect, aspect, -1.0, 1.0, zNear, zFar)</code></pre>
+</details>
+<div class="desc"><p>Set the projection matrix for rendering.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>fov</code></strong> :&ensp;<code>float</code></dt>
+<dd>Field of view in degrees</dd>
+<dt><strong><code>aspect</code></strong> :&ensp;<code>float</code></dt>
+<dd>Aspect ratio (width/height)</dd>
+<dt><strong><code>zNear</code></strong> :&ensp;<code>float</code></dt>
+<dd>Near clipping plane distance</dd>
+<dt><strong><code>zFar</code></strong> :&ensp;<code>float</code></dt>
+<dd>Far clipping plane distance</dd>
+<dt><strong><code>type</code></strong> :&ensp;<code>int</code></dt>
+<dd>Projection type (1 for perspective, other for orthographic)</dd>
+</dl></div>
+</dd>
+<dt id="3D_Engine.Engine.Engine.terminate"><code class="name flex">
+<span>def <span class="ident">terminate</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def terminate(self):
+    &#34;&#34;&#34;
+    Clean up resources and terminate GLFW.
+    Should be called when the application exits.
+    &#34;&#34;&#34;
+    glfw.terminate()</code></pre>
+</details>
+<div class="desc"><p>Clean up resources and terminate GLFW.
+Should be called when the application exits.</p></div>
+</dd>
+<dt id="3D_Engine.Engine.Engine.text_input_callback"><code class="name flex">
+<span>def <span class="ident">text_input_callback</span></span>(<span>self, window, character)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def text_input_callback(self, window, character):
+    &#34;&#34;&#34;
+    Handle text input events.
+
+    Args:
+        window: GLFW window instance
+        character (int): Unicode codepoint of the character
+    &#34;&#34;&#34;
+    self.input_text += chr(character)</code></pre>
+</details>
+<div class="desc"><p>Handle text input events.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>window</code></strong></dt>
+<dd>GLFW window instance</dd>
+<dt><strong><code>character</code></strong> :&ensp;<code>int</code></dt>
+<dd>Unicode codepoint of the character</dd>
+</dl></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="3D_Engine" href="index.html">3D_Engine</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="3D_Engine.Engine.Engine" href="#3D_Engine.Engine.Engine">Engine</a></code></h4>
+<ul class="">
+<li><code><a title="3D_Engine.Engine.Engine.cursor_position_callback" href="#3D_Engine.Engine.Engine.cursor_position_callback">cursor_position_callback</a></code></li>
+<li><code><a title="3D_Engine.Engine.Engine.initialize" href="#3D_Engine.Engine.Engine.initialize">initialize</a></code></li>
+<li><code><a title="3D_Engine.Engine.Engine.key_callback" href="#3D_Engine.Engine.Engine.key_callback">key_callback</a></code></li>
+<li><code><a title="3D_Engine.Engine.Engine.main_loop" href="#3D_Engine.Engine.Engine.main_loop">main_loop</a></code></li>
+<li><code><a title="3D_Engine.Engine.Engine.mouse_button_callback" href="#3D_Engine.Engine.Engine.mouse_button_callback">mouse_button_callback</a></code></li>
+<li><code><a title="3D_Engine.Engine.Engine.scroll_callback" href="#3D_Engine.Engine.Engine.scroll_callback">scroll_callback</a></code></li>
+<li><code><a title="3D_Engine.Engine.Engine.set_projection" href="#3D_Engine.Engine.Engine.set_projection">set_projection</a></code></li>
+<li><code><a title="3D_Engine.Engine.Engine.terminate" href="#3D_Engine.Engine.Engine.terminate">terminate</a></code></li>
+<li><code><a title="3D_Engine.Engine.Engine.text_input_callback" href="#3D_Engine.Engine.Engine.text_input_callback">text_input_callback</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.5</a>.</p>
+</footer>
+</body>
+</html>

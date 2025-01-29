@@ -21,3 +21,5 @@ class Camera:
         self.position += glm.vec3(delta_position)
         self.target += glm.vec3(delta_position) 
         self.update_view_matrix()
+    def get_position(self):
+        return self.position
